@@ -30,6 +30,9 @@ class Calculator(QWidget):
         self.b_3 = QPushButton("3", self)
         self.hbox_first.addWidget(self.b_3)
 
+        self.d = QPushButton("DELETE",self)
+        self.hbox_first.addWidget((self.d))
+
         self.b_4 = QPushButton("4", self)
         self.hbox_second.addWidget(self.b_4)
 
@@ -74,6 +77,7 @@ class Calculator(QWidget):
         self.b_minus.clicked.connect(lambda: self._operation("-"))
         self.b_umn.clicked.connect(lambda: self._operation("*"))
         self.b_del.clicked.connect(lambda: self._operation("/"))
+        self.d.clicked.connect(lambda: self._operation("DELETE"))
         self.b_result.clicked.connect(self._result)
 
         self.b_1.clicked.connect(lambda: self._button("1"))
@@ -103,8 +107,10 @@ class Calculator(QWidget):
             self.input.setText(str(round((self.num_1 - self.num_2),4)))
         elif self.op == "*":
             self.input.setText(str(self.num_1 * self.num_2))
-        else:
+        elif self.op == "/":
             self.input.setText(str(self.num_1 / self.num_2))
+        elif self.op == "DELETE":
+            self.input.setText("")
 
 app = QApplication(sys.argv)
 win = Calculator()
